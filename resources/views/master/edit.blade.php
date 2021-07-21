@@ -11,7 +11,7 @@
                      <input type="text" name="master_name" class="form-control" value="{{$master->name}}">
                      <small class="form-text text-muted">Name.</small>
                      <label>Surname</label>
-                     <input type="text" name="master_surname" class="form-control" value="{{$master->surname}}">
+                     <input type="text" name="master_surname" class="form-control" value="{{old('master_surname',$master->surname)}}">
                      <small class="form-text text-muted">Surname.</small>
                         @csrf
                         <button type="submit">EDIT</button>

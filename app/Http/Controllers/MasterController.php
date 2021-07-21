@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Master;
 use Illuminate\Http\Request;
+use Validator;
 
 class MasterController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -37,6 +42,16 @@ class MasterController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(),
+        [
+            'master_name' => ['required', 'min:3', 'max:64'],
+            'master_surname' => ['required', 'min:3', 'max:64'],
+        ]
+        );
+            if ($validator->fails()) {
+                $request->flash();
+                return redirect()->back()->withErrors($validator);
+        }
         $master = new Master;
         $master->name = $request->master_name;      //DB->stulpelio_vardas = Formos->name_atributas
         $master->surname = $request->master_surname;
